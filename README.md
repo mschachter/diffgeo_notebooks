@@ -1,48 +1,41 @@
 This project documents a variety of foundational topics encountered on my adventures through the world of differential geometry.
 
-Here are the topics I'm trying to learn, in a not particularly organized way:
+* Parameterized Curves in Three Dimensions
+  - Some interesting parameterized curves
+  - Tangents and arc length
+  - Torsion and curvature
+  - Curves as differential equations: the Frenet-Serret formulas
 
-* Parameterized Curves
-  - Tangents
-  - Curvature
-  - Frenet equations
-
-* Parameterized Surfaces
-  - Planes
-  - Push-forwards, differentials
-  - Pullbacks
-  - Change of basis and Jacobians
+* Parameterized Surfaces and Fields in Three Dimensions
+  - Vector fields on the Euclidean plane
+  - Gradients, divergences, curls, and Laplacians
+  - Flat surfaces in three dimensions
+  - Parameterized curved surfaces
+  - Directional derivatives
+  - Coordinate systems, changes of basis, Jacobians
+  - Push-forwards and differentials
   - Tangent planes
-  - Vector fields
-  - Grad, div, curl, Laplacian
-  - Random walk on a sphere
-  - Directional Derivatives
-  - Covariant derivatives
-    
-* Intrinsic Geometry
+  - Random walks on surfaces
+
+* Intrinsic Geometry in Three Dimensions
+  - Computing the area of a surface
   - Gauss map
-  - Curvature
-  - Conformal maps
+  - Computing the curvature of a surface
   - First and second fundamental forms
-  - Christoffel symbols
-    
-* Differential Forms
-  - Boundaries
-  - Integration on R^n
-  - Integration on differential forms
-  - Generalized Stokes Theorem
+  - Christoffel symbols 
 
 * Geodesics
-  - Covariant Derivatives
+  - Isometric and conformal maps
+  - Covariant derivatives
   - Parallel transport
   - Connections
-
-* Topology
+  
+* Topology of Surfaces in Three Dimensions
   - Euler characteristics
   - Betti numbers
   - Gauss-Bonnet theorem
 
-* Exterior (Discrete) Calculus
+* Discretized Surfaces in Three Dimensions
   - Simplices
   - Cell Complexes
   - Chains & Co-chains
@@ -50,3 +43,10 @@ Here are the topics I'm trying to learn, in a not particularly organized way:
   - Laplacian
   - Boundary Operator
   - Poissson Equation
+    
+* Differential Forms
+  - Boundaries
+  - Integration on R^n
+  - Integration on differential forms
+  - Generalized Stokes Theorem
+
