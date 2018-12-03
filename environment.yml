@@ -1,0 +1,11 @@
+name: diffgeo_notebooks
+dependencies:
+  - jupyter
+  - numpy
+  - scipy
+  - matplotlib
+  - pip
+  - pip:
+      - jupyterthemes
+  
+
