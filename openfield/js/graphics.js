@@ -47,6 +47,12 @@ const hex2color = (hexColor) =>
     return rgb2color(rgbObj.r, rgbObj.g, rgbObj.b);
 }
 
+/* Returns true if abs(val) is less than eps */
+const isNumericalZero = (val, eps=1e-8) =>
+{
+    return Math.abs(val) < eps;
+}
+
 /* Compute the cross product between two vectors. Returns the cross product as an Array. */
 const cross = (v, w) =>
 {
@@ -56,7 +62,7 @@ const cross = (v, w) =>
 /* Compute the angle in radians between two vectors. */
 const angle = (v, w) =>
 {
-    return Math.acos(dot(v, w), norm(v)*norm(w));
+    return Math.acos(dot(v, w) / (norm(v)*norm(w)));
 }
 
 const makeTextPlane = (text, color, size, scene) =>
@@ -141,17 +147,15 @@ const drawArrow = (p, v, scene,
                                                  {diameter: originDiameter, diameterTop: 0, tessellation: 12, height: headLength},
                                                  scene);
 
-    // define an orthogonal axis to rotate the arrow head into it's correct position
-    let w = [0, 1, 0];
-    let ovec = a2b(cross(v, w));
-    let s = Math.sign(v[2])
-    let sb = s >= 0 ? 1 : 0;
-    let a = Math.acos(norm(v), norm(w));
-    console.log('a=',a)
-    let rotAngle =  (1-sb)*Math.PI - s*((Math.PI/2) - a);
-    //let rotAngle = Math.PI - Math.abs(Math.acos(norm(v), norm(w)));
+    // define an orthogonal axis to rotate the arrow head into it's correct position    
+    let w = [0, 1, 0];    
+    let o = cross(v, w); 
+    if (norm0(o) == 0) {
+        o = [1, 0, 0];
+    }
+    let rotAngle = -angle(v, w);
     
     // position and rotate the arrow head
     head.position = hvec;
-    head.rotationQuaternion = new BABYLON.Quaternion.RotationAxis(ovec, rotAngle);
+    head.rotationQuaternion = new BABYLON.Quaternion.RotationAxis(a2b(o), rotAngle);
 }
