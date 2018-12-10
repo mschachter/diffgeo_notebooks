@@ -3,7 +3,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Babylon Template</title>
+        <title>open field</title>
 
         <style>
             html, body {
@@ -22,7 +22,8 @@
         </style>
         
         <script src="js/babylon.custom.js"></script>
-        <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+        <script src="js/lalolib/lalolib.js"></script>
+        <script src="js/graphics.js"></script>
     </head>
 
    <body>
@@ -31,101 +32,34 @@
 
     <script>
 
-        const randomString = (stringLength=5) =>
-        {
-            return Math.random().toString(36).substring(2, stringLength);
-        }
-
-        const bVec = (p) =>
-        {
-            if (p instanceof BABYLON.Vector3) return p;
-            return new BABYLON.Vector3(p[0], p[1], p[2]);
-        }
-
-        const bColor = (r, g, b) =>
-        {
-            return new BABYLON.Color3(r, g, b);
-        }
-
-        /*
-          Draw an arrow at location p with magnitude/direction specified by vector v.
-
-          p: origin, array/vector of length 3
-          v: vector, array/vector of length 3
-          scene: babylon scene object
-          originDiameter: the diameter of the origin spere
-          showOrigin: whether or not to plot the origin
-          name: the base name of the objects created by this function call
-         */
-        const drawArrow = (p, v, scene,
-                           shaftColor=bColor(0, 0, 0), originColor=bColor(0, 0, 0), headColor=bColor(0, 0, 0),
-                           showOrigin=true, originDiameter=0.05, headLength=0.1, name=null) =>
-        {
-            let baseName;
-            if (name === null)
-            {
-                baseName = randomString();
-            } else {
-                baseName = name;
-            }
-
-            let pvec = bVec(p);
-            let vvec = bVec(v);
-
-            // create the arrow origin
-            const sphere = BABYLON.MeshBuilder.CreateSphere("arrOrig_" + baseName, {diameter:originDiameter}, scene);
-            sphere.position = pvec;
-
-            // draw the shaft of the arrow
-            let arrowPoints = new Array();
-            let hvec = pvec.add(vvec);
-            arrowPoints.push(pvec);
-            arrowPoints.push(hvec);
-            var shaft = BABYLON.Mesh.CreateLines("shaft_" + baseName, arrowPoints, scene);
-            shaft.color = shaftColor;
-
-            // draw the arrow head
-            let head = BABYLON.MeshBuilder.CreateCylinder("cone_" + baseName,
-                                                         {diameter: originDiameter, diameterTop: 0, tessellation: 12, height: headLength},
-                                                         scene);
-            head.position = hvec;
-        }
-
         var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
         var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-        /******* Add the create scene function ******/
-        var createScene = function () {
+        const createScene = () =>
+        {
 
             // Create the scene space
             var scene = new BABYLON.Scene(engine);
 
             // Add a camera to the scene and attach it to the canvas
-            var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0,0,5), scene);
+            var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 4, a2b([0,0,0]), scene);
             camera.attachControl(canvas, true);
 
             // Add lights to the scene
             var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
             var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
 
-            drawArrow([0, 0, 0], [0, 0, 1]);
-
-            /*
-            // Add and manipulate meshes in the scene
-            var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:0.4}, scene);
-
-            // create a line
-            var myPoints =[
-                new BABYLON.Vector3(0, 0, 0),
-                new BABYLON.Vector3(0, 1, 1),
-                new BABYLON.Vector3(0, 1, 0)
-            ];
-            var lines = BABYLON.MeshBuilder.CreateLines("lines", {points: myPoints}, scene);
-            */
+            drawGlobalAxis(1, scene);
+            drawArrow(a2v([0, 0, 0]), a2v([0.5, 0.5, 0.5]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([-0.5, 0.25, 0.75]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([-0.5, -0.25, -0.75]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([0.5, -0.3, -0.6]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([0.5, 0, -0.6]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([0, 0.5, 0]), scene);
+            drawArrow(a2v([0, 0, 0]), a2v([0, -0.5, 0]), scene);
 
             return scene;
         };
-        /******* End of the create scene function ******/    
 
         var scene = createScene(); //Call the createScene function
 
@@ -138,6 +72,7 @@
         window.addEventListener("resize", function () { 
                 engine.resize();
         });
+
     </script>
 
    </body>
