@@ -5,30 +5,47 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>open field</title>
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
         
-        <script src="js/babylon.custom.js"></script>
-        <script src="js/lalolib/lalolib.js"></script>
+        <script src="js/thirdparty/babylon.custom.js"></script>
+        <script src="js/thirdparty/lalolib/lalolib.js"></script>
         <script src="js/graphics.js"></script>
     </head>
 
    <body>
 
-    <canvas id="renderCanvas" touch-action="none"></canvas> //touch-action="none" for best results from PEP
+    <div class="header">
+      <h1>Open Field 0.1</h1>
+    </div>
+
+    <div class="topnav">
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+      <a href="#" style="float:right">Link</a>
+    </div>
+
+    <div class="row">
+
+      <div class="leftcolumn">
+        <div class="card">
+          Input params go here.
+        </div>
+       
+      </div>
+      
+      <div class="rightcolumn">
+        <div class="card">
+          <canvas id="renderCanvas" touch-action="none"></canvas>
+        </div>
+            
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <h2>Footer</h2>
+    </div>    
 
     <script>
 
@@ -69,13 +86,15 @@
 
         // Register a render loop to repeatedly render the scene
         engine.runRenderLoop(function () { 
-                scene.render();
+            scene.render();
         });
 
         // Watch for browser/canvas resize events
         window.addEventListener("resize", function () { 
-                engine.resize();
+            engine.resize();
         });
+
+        //openNav();
 
     </script>
 
